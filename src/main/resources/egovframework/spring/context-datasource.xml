@@ -22,12 +22,12 @@
     -->  
     
     <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) --> 
-<!--    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:13306/kosa_db" />
-        <property name="username" value="scott"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://43.203.249.65:3306/kosa_db" />
+        <property name="username" value="root"/>
         <property name="password" value="kosa1004"/>
-    </bean>  -->
+    </bean> 
     
     <!-- mariadb (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) --> 
 <!--     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -54,7 +54,7 @@
     </bean> -->
     
     <!-- Mysql -->
-<bean id="dataSource"
+<!-- <bean id="dataSource"
       class="org.apache.commons.dbcp2.BasicDataSource"
       destroy-method="close">
 
@@ -63,7 +63,7 @@
     <property name="url" value="${DB_URL}"/>
     <property name="username" value="${DB_USERNAME}"/>
     <property name="password" value="${DB_PASSWORD}"/>
-</bean>
+</bean> -->
 
    
     
