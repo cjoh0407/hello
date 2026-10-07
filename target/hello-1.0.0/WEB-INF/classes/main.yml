@@ -1,0 +1,55 @@
+name: 전자정부프레엠웍을 사용하여 빌드 및 배포
+
+on:
+  push:
+    branches:
+      - empty      # 주석 : main 브랜치에 push가 되면 actions가 동작함
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 어떤 운영체제 버전에서 실행하는지 설정 cancel-timeout-minutes: cancel-timeout-minutes: 
+
+    steps:
+    - name: git 저장소 소스 복사전의 폴더 구조
+      run: ls -la
+    
+    - name: 소스 check out 
+      uses: actions/checkout@v3
+
+    - name: git 저장소 소스 복사후의 폴더 구조
+      run: ls -la
+
+    - name: git 저장소 소스 복사후의 hello 폴더 구조 # 리눅스 셀 명령어 2줄 이상 실행시
+      run: |   
+        ls -la
+      
+    - name: 메이븐 빌드
+      run: mvn clean package
+
+    - name: 보안환경변수를 이용하여 개인키 파일생성
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        
+    - name: actions을 사용하여 보안환경변수를 이용하여 개인키 파일생성
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+        
+    - name: 서버연결시 지문등록
+      run: ssh-keyscan -t ed25519 13.125.180.143 >> ~/.ssh/known_hosts
+       
+#    - name: 개인키파일확인 
+#      run: |
+#        cat ~/.ssh/id_rsa
+#        cat ~/.ssh/known_hosts
+ 
+    - name: 운영서버에 배포 진행 
+      run: |
+        scp target/hello-1.0.0.war ubuntu@13.125.180.143:~/ROOT.war
+        ssh -i ~/.ssh/id_rsa ubuntu@13.125.180.143 << 'EOF'
+          cp ~/ROOT.war /opt/tomcat/webapps/
+        EOF
+      
+    
