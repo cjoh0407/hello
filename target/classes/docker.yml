@@ -5,6 +5,7 @@ on:
     branches:
       - main      # 주석 : main 브랜치에 push가 되면 actions가 동작함
 
+#
 #환경변수
 env:
   SERVER_IP: 3.34.96.62
