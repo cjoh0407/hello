@@ -1,0 +1,10 @@
+target/
+.git/
+.github/
+.idea/
+.settings/
+.project
+.classpath
+.env
+*.env
+*.pem
