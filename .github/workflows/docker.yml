@@ -55,11 +55,11 @@ jobs:
 #        cat ~/.ssh/id_rsa
 #        cat ~/.ssh/known_hosts
  
-  deploy:
-    needs: build
-    name: 운영서버에 배포 진행
-    runs-on: ubuntu-latest  # 어떤 운영체제 버전에서 실행하는지 설정 cancel-timeout-minutes: cancel-timeout-minutes:
-    steps: 
+#  deploy:
+#    needs: build
+#    name: 운영서버에 배포 진행
+#    runs-on: ubuntu-latest  # 어떤 운영체제 버전에서 실행하는지 설정 cancel-timeout-minutes: cancel-timeout-minutes:
+#    steps: 
 
     - name: 배포 실행      
       run: |
